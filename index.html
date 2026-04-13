@@ -1,110 +1,293 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFA // 040</title>
-    <style>
-        :root {
-            --bg: #000000;
-            --accent: #fff;
-            --grey: #1a1a1a;
-        }
-        body {
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Helvetica Neue', sans-serif;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-        .header {
-            padding: 40px;
-            font-size: 5vw;
-            font-weight: 900;
-            line-height: 0.9;
-            border-bottom: 1px solid var(--grey);
-        }
-        .nav {
-            padding: 20px 40px;
-            display: flex;
-            gap: 20px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-        .main-content {
-            padding: 40px;
-        }
-        .bio {
-            font-size: 1.5rem;
-            max-width: 600px;
-            text-transform: none;
-            letter-spacing: 0;
-            margin-bottom: 50px;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2px;
-            background-color: var(--grey);
-        }
-        .blog-post {
-            background-color: var(--bg);
-            padding: 30px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .blog-post:hover {
-            background-color: var(--accent);
-            color: var(--bg);
-        }
-        .footer {
-            padding: 40px;
-            font-size: 0.7rem;
-            opacity: 0.5;
-        }
-        .accent-text { color: #555; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFA // 040</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#000;--fg:#fff;--grey:#111;--mid:#333;--muted:#666;--accent:#fff}
+  body{background:var(--bg);color:var(--fg);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:1px solid #1a1a1a;position:sticky;top:0;background:rgba(0,0,0,0.95);backdrop-filter:blur(10px);z-index:100}
+  .nav-logo{font-size:1rem;font-weight:900;letter-spacing:-1px}
+  .nav-links{display:flex;gap:24px;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:#fff;transition:.2s}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:22px;height:1px;background:#fff;transition:.3s}
+  .mobile-menu{display:none;flex-direction:column;gap:0;background:#000;border-bottom:1px solid #1a1a1a}
+  .mobile-menu a{padding:16px 40px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid #111}
+  .mobile-menu a:hover{color:#fff}
+  .mobile-menu.open{display:flex}
+
+  .hero{padding:80px 40px 60px;border-bottom:1px solid #1a1a1a}
+  .hero-label{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+  .hero-name{font-size:clamp(3rem,10vw,8rem);font-weight:900;line-height:.9;letter-spacing:-3px;text-transform:uppercase}
+  .hero-sub{font-size:clamp(1.5rem,4vw,3rem);font-weight:900;line-height:.9;letter-spacing:-2px;text-transform:uppercase;color:#333;margin-bottom:40px}
+  .hero-bio{font-size:clamp(0.95rem,2vw,1.15rem);max-width:560px;line-height:1.7;color:#aaa;font-weight:400;letter-spacing:0;text-transform:none;margin-bottom:40px}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{padding:6px 14px;border:1px solid #333;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+  section{padding:60px 40px;border-bottom:1px solid #1a1a1a}
+  .section-label{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#1a1a1a}
+  .skill-card{background:#000;padding:28px;transition:.2s}
+  .skill-card:hover{background:#0f0f0f}
+  .skill-icon{font-size:0.7rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+  .skill-name{font-size:1rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
+  .skill-level{display:flex;gap:3px;margin-top:10px}
+  .skill-dot{width:20px;height:2px;background:#222}
+  .skill-dot.filled{background:#fff}
+
+  .projects-list{display:flex;flex-direction:column;gap:1px;background:#1a1a1a}
+  .project-item{background:#000;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.2s}
+  .project-item:hover{background:#0d0d0d}
+  .project-left{}
+  .project-num{font-size:0.65rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
+  .project-title{font-size:1.1rem;font-weight:700;letter-spacing:-0.5px}
+  .project-desc{font-size:0.85rem;color:#666;margin-top:4px;letter-spacing:0;text-transform:none}
+  .project-arrow{font-size:1.2rem;color:#333}
+  .project-item:hover .project-arrow{color:#fff;transition:.2s}
+
+  .journal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:#1a1a1a}
+  .journal-card{background:#000;padding:30px;cursor:pointer;transition:.2s}
+  .journal-card:hover{background:#fff;color:#000}
+  .journal-card:hover .journal-meta{color:#555}
+  .journal-date{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .journal-title{font-size:1.05rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
+  .journal-preview{font-size:0.85rem;color:#666;line-height:1.6;letter-spacing:0;text-transform:none}
+  .journal-meta{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:16px}
+
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#1a1a1a;margin-bottom:40px}
+  .contact-item{background:#000;padding:28px;transition:.2s}
+  .contact-item:hover{background:#0d0d0d}
+  .contact-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .contact-value{font-size:0.9rem;font-weight:500}
+  .contact-form{display:flex;flex-direction:column;gap:12px;max-width:600px}
+  .contact-form input,.contact-form textarea{background:#0a0a0a;border:1px solid #222;color:#fff;padding:14px 18px;font-size:0.9rem;font-family:inherit;outline:none;letter-spacing:0;text-transform:none;transition:.2s}
+  .contact-form input:focus,.contact-form textarea:focus{border-color:#555}
+  .contact-form textarea{min-height:120px;resize:vertical}
+  .contact-form button{background:#fff;color:#000;border:none;padding:14px 32px;font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;align-self:flex-start;transition:.2s}
+  .contact-form button:hover{background:#ddd}
+
+  footer{padding:30px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .footer-left{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#333}
+  .footer-right{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#333}
+
+  @media(max-width:700px){
+    nav{padding:16px 20px}
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .mobile-menu a{padding:14px 20px}
+    .hero{padding:50px 20px 40px}
+    .hero-name{letter-spacing:-2px}
+    section{padding:40px 20px}
+    .skill-card,.project-item,.journal-card,.contact-item{padding:20px}
+    .project-item{flex-direction:column;align-items:flex-start;gap:8px}
+    footer{padding:20px;flex-direction:column;align-items:flex-start;gap:6px}
+  }
+</style>
 </head>
 <body>
 
-    <div class="nav">
-        <span>Hamburg // Germany</span>
-        <span>Version 1.0</span>
-        <span>2026</span>
+<nav>
+  <div class="nav-logo">SA // 040</div>
+  <div class="nav-links">
+    <a href="#about">Über mich</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projekte</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Kontakt</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()" id="ham">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">Über mich</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#projects" onclick="closeMenu()">Projekte</a>
+  <a href="#journal" onclick="closeMenu()">Journal</a>
+  <a href="#contact" onclick="closeMenu()">Kontakt</a>
+</div>
+
+<div class="hero" id="about">
+  <div class="hero-label">// Hamburg, Deutschland — 2026</div>
+  <div class="hero-name">SAFA</div>
+  <div class="hero-sub">SYSTEMS &<br>STRATEGY</div>
+  <div class="hero-bio">
+    Angehender Fachinformatiker für Systemintegration. Abitur 2025, IHK-geprüft, Cisco IT Essentials. Ich interessiere mich ernsthaft für IT — Hardware, Netzwerke, Systeme. Ich baue Dinge und will verstehen wie sie funktionieren.
+  </div>
+  <div class="hero-tags">
+    <div class="tag">Hamburg</div>
+    <div class="tag">IT / Systemintegration</div>
+    <div class="tag">Verfügbar ab sofort</div>
+    <div class="tag">IHK-zertifiziert</div>
+    <div class="tag">Cisco IT Essentials</div>
+  </div>
+</div>
+
+<section id="skills">
+  <div class="section-label">// Kompetenzen</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">Hardware</div>
+      <div class="skill-name">PC-Hardware & Komponenten</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div>
+      </div>
     </div>
-
-    <div class="header">
-        SAFA<br>
-        <span class="accent-text">SYSTEMS &<br>STRATEGY</span>
+    <div class="skill-card">
+      <div class="skill-icon">Diagnose</div>
+      <div class="skill-name">Hard- & Softwareprobleme lösen</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div>
+      </div>
     </div>
-
-    <div class="main-content">
-        <div class="bio">
-            Abiturient. IHK-geprüft. Tech-Addict. <br><br>
-            Ich bin Safa, 19, aus Hamburg. Ich baue Dinge – egal ob Hardware, Software oder Business-Strukturen. Loyalität gegenüber der Family und Hunger auf Erfolg sind mein Antrieb. Hier teile ich meinen Weg.
-        </div>
-
-        <h2 style="font-size: 0.8rem; margin-bottom: 20px;">// JOURNAL</h2>
-        <div class="blog-grid">
-            <div class="blog-post">
-                <h3>040 VIBES</h3>
-                <p style="text-transform: none; font-size: 0.9rem;">Warum Hamburg die perfekte Basis für alles ist.</p>
-            </div>
-            <div class="blog-post">
-                <h3>THE HUSTLE</h3>
-                <p style="text-transform: none; font-size: 0.9rem;">Verantwortung übernehmen, wenn andere noch pennen.</p>
-            </div>
-            <div class="blog-post">
-                <h3>TECH LAB</h3>
-                <p style="text-transform: none; font-size: 0.9rem;">KI, Server und warum Bits & Bytes meine Sprache sind.</p>
-            </div>
-        </div>
+    <div class="skill-card">
+      <div class="skill-icon">Netzwerk</div>
+      <div class="skill-name">IP, Router, LAN/WLAN</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
     </div>
-
-    <div class="footer">
-        © 2026 SAFA. ALL RIGHTS RESERVED. NO LUCK, JUST WORK.
+    <div class="skill-card">
+      <div class="skill-icon">Architektur</div>
+      <div class="skill-name">Client-Server-Strukturen</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
     </div>
+    <div class="skill-card">
+      <div class="skill-icon">Code</div>
+      <div class="skill-name">Python (Grundlagen)</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Sprachen</div>
+      <div class="skill-name">Deutsch · Englisch · Persisch</div>
+      <div class="skill-level">
+        <div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="projects">
+  <div class="section-label">// Projekte & Erfahrung</div>
+  <div class="projects-list">
+    <div class="project-item">
+      <div class="project-left">
+        <div class="project-num">01</div>
+        <div class="project-title">Schülerfirma — Vorstandsvorsitz</div>
+        <div class="project-desc">Leitung und Organisation einer Schülerfirma. Verantwortung für Strategie, Team und Abläufe.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-item">
+      <div class="project-left">
+        <div class="project-num">02</div>
+        <div class="project-title">Cisco IT Essentials</div>
+        <div class="project-desc">Abgeschlossener Online-Kurs 2025. Netzwerkgrundlagen, Hardware, Betriebssysteme.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-item">
+      <div class="project-left">
+        <div class="project-num">03</div>
+        <div class="project-title">IHK Fachkundeprüfung</div>
+        <div class="project-desc">Taxi & Mietwagenverkehr — bestanden Dezember 2025. Zeigt Lernfähigkeit und Disziplin.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-item">
+      <div class="project-left">
+        <div class="project-num">04</div>
+        <div class="project-title">Diese Website</div>
+        <div class="project-desc">Aufgebaut mit HTML/CSS. Custom Domain, GitHub Pages. Eigeninitiative.</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<section id="journal">
+  <div class="section-label">// Journal</div>
+  <div class="journal-grid">
+    <div class="journal-card">
+      <div class="journal-date">Demnächst</div>
+      <div class="journal-title">040 Vibes</div>
+      <div class="journal-preview">Warum Hamburg die perfekte Basis für alles ist — und was diese Stadt mit IT zu tun hat.</div>
+      <div class="journal-meta">Kommt bald</div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-date">Demnächst</div>
+      <div class="journal-title">The Hustle</div>
+      <div class="journal-preview">Verantwortung übernehmen, wenn andere noch pennen. Was ich aus meiner Zeit als Schülerfirmen-Chef mitgenommen hab.</div>
+      <div class="journal-meta">Kommt bald</div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-date">Demnächst</div>
+      <div class="journal-title">Tech Lab</div>
+      <div class="journal-preview">KI, Server und warum Bits & Bytes meine Sprache sind. Mein Weg in die Systemintegration.</div>
+      <div class="journal-meta">Kommt bald</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// Kontakt</div>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-label">E-Mail</div>
+      <div class="contact-value">safa.ahadzada06@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Telefon</div>
+      <div class="contact-value">+49 1573 1627658</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Standort</div>
+      <div class="contact-value">Hamburg, Deutschland</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Status</div>
+      <div class="contact-value" style="color:#4ade80">Offen für Ausbildung</div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="E-Mail">
+    <textarea placeholder="Nachricht"></textarea>
+    <button type="button">Nachricht senden →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 SAFA AHADZADA — NO LUCK, JUST WORK.</div>
+  <div class="footer-right">Hamburg // Germany</div>
+</footer>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t) t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
 </body>
 </html>

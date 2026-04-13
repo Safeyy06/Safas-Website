@@ -2,61 +2,109 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>SAFA | MISSION: IT-SYSTEMINTEGRATION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFA // 040</title>
     <style>
-        :root { --neon-cyan: #00f2ff; --dark-bg: #050505; }
-        body { background: var(--dark-bg); color: white; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
-        
-        /* Neon Glow Effect */
-        .neon-text { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan); }
-        
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, #111 0%, #000 100%); }
-        
-        /* Terminal Style Animation */
-        .typewriter h1 { overflow: hidden; border-right: .15em solid var(--neon-cyan); white-space: nowrap; margin: 0 auto; letter-spacing: .15em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--neon-cyan); } }
-
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 50px; max-width: 1200px; margin: auto; }
-        .card { border: 1px solid #333; padding: 30px; background: rgba(255,255,255,0.02); transition: 0.3s; }
-        .card:hover { border-color: var(--neon-cyan); background: rgba(0, 242, 255, 0.05); transform: translateY(-5px); }
-        
-        .status-bar { width: 100%; height: 5px; background: #222; margin-top: 10px; }
-        .status-fill { height: 100%; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
+        :root {
+            --bg: #000000;
+            --accent: #fff;
+            --grey: #1a1a1a;
+        }
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .header {
+            padding: 40px;
+            font-size: 5vw;
+            font-weight: 900;
+            line-height: 0.9;
+            border-bottom: 1px solid var(--grey);
+        }
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .main-content {
+            padding: 40px;
+        }
+        .bio {
+            font-size: 1.5rem;
+            max-width: 600px;
+            text-transform: none;
+            letter-spacing: 0;
+            margin-bottom: 50px;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2px;
+            background-color: var(--grey);
+        }
+        .blog-post {
+            background-color: var(--bg);
+            padding: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .blog-post:hover {
+            background-color: var(--accent);
+            color: var(--bg);
+        }
+        .footer {
+            padding: 40px;
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+        .accent-text { color: #555; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="typewriter">
-            <h1 class="neon-text">INITIALIZING SAFA_PORTFOLIO...</h1>
-        </div>
-        <p style="margin-top: 20px; opacity: 0.6;">> Standort: Hamburg | Status: Ausbildung suchend</p>
-    </section>
+    <div class="nav">
+        <span>Hamburg // Germany</span>
+        <span>Version 1.0</span>
+        <span>2026</span>
+    </div>
 
-    <div class="content-grid">
-        <div class="card">
-            <h2 class="neon-text">// ÜBER MICH</h2>
-            <p>Abiturient 2025 mit einer tiefen Obsession für System-Architekturen. Während andere nur konsumieren, analysiere ich die Infrastruktur dahinter. IHK-Zertifizierung im Bereich Logistik/Personenbeförderung erfolgreich abgeschlossen – jetzt folgt der Deep Dive in die IT-Systemintegration.</p>
+    <div class="header">
+        SAFA<br>
+        <span class="accent-text">SYSTEMS &<br>STRATEGY</span>
+    </div>
+
+    <div class="main-content">
+        <div class="bio">
+            Abiturient. IHK-geprüft. Tech-Addict. <br><br>
+            Ich bin Safa, 19, aus Hamburg. Ich baue Dinge – egal ob Hardware, Software oder Business-Strukturen. Loyalität gegenüber der Family und Hunger auf Erfolg sind mein Antrieb. Hier teile ich meinen Weg.
         </div>
 
-        <div class="card">
-            <h2 class="neon-text">// TECH STACK</h2>
-            <p>OS Deployment (Windows/Linux)</p>
-            <div class="status-bar"><div class="status-fill" style="width: 85%;"></div></div>
-            <p>Hardware Troubleshooting</p>
-            <div class="status-bar"><div class="status-fill" style="width: 95%;"></div></div>
-            <p>Network Security Basics</p>
-            <div class="status-bar"><div class="status-fill" style="width: 70%;"></div></div>
+        <h2 style="font-size: 0.8rem; margin-bottom: 20px;">// JOURNAL</h2>
+        <div class="blog-grid">
+            <div class="blog-post">
+                <h3>040 VIBES</h3>
+                <p style="text-transform: none; font-size: 0.9rem;">Warum Hamburg die perfekte Basis für alles ist.</p>
+            </div>
+            <div class="blog-post">
+                <h3>THE HUSTLE</h3>
+                <p style="text-transform: none; font-size: 0.9rem;">Verantwortung übernehmen, wenn andere noch pennen.</p>
+            </div>
+            <div class="blog-post">
+                <h3>TECH LAB</h3>
+                <p style="text-transform: none; font-size: 0.9rem;">KI, Server und warum Bits & Bytes meine Sprache sind.</p>
+            </div>
         </div>
     </div>
 
-    <section style="text-align: center; padding: 100px;">
-        <h2 class="neon-text">BEREIT FÜR DAS NÄCHSTE LEVEL?</h2>
-        <p>Ich suche ein Unternehmen in Hamburg, das mein Potenzial erkennt und fördert.</p>
-        <a href="mailto:deine-mail@web.de" style="color: var(--neon-cyan); text-decoration: none; border: 1px solid var(--neon-cyan); padding: 15px 30px;">[ KONTAKT AUFNEHMEN ]</a>
-    </section>
+    <div class="footer">
+        © 2026 SAFA. ALL RIGHTS RESERVED. NO LUCK, JUST WORK.
+    </div>
 
 </body>
 </html>

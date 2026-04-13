@@ -21,13 +21,25 @@
   .mobile-menu a:hover{color:#fff}
   .mobile-menu.open{display:flex}
 
-  .hero{padding:80px 40px 60px;border-bottom:1px solid #1a1a1a}
+  .hero{padding:80px 40px 60px;border-bottom:1px solid #1a1a1a;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   .hero-label{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
   .hero-name{font-size:clamp(3rem,10vw,8rem);font-weight:900;line-height:.9;letter-spacing:-3px;text-transform:uppercase}
   .hero-sub{font-size:clamp(1.5rem,4vw,3rem);font-weight:900;line-height:.9;letter-spacing:-2px;text-transform:uppercase;color:#333;margin-bottom:40px}
-  .hero-bio{font-size:clamp(0.95rem,2vw,1.15rem);max-width:560px;line-height:1.7;color:#aaa;font-weight:400;letter-spacing:0;text-transform:none;margin-bottom:40px}
+  .hero-bio{font-size:clamp(0.95rem,2vw,1.1rem);max-width:480px;line-height:1.7;color:#aaa;font-weight:400;letter-spacing:0;text-transform:none;margin-bottom:40px}
   .hero-tags{display:flex;flex-wrap:wrap;gap:8px}
   .tag{padding:6px 14px;border:1px solid #333;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+  .status-panel{border:1px solid #1a1a1a;padding:36px;display:flex;flex-direction:column;gap:0;background:#000}
+  .clock-block{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid #1a1a1a}
+  .clock-time{font-size:clamp(2.2rem,4vw,4rem);font-weight:900;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums}
+  .clock-date{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:#555;margin-top:10px}
+  .status-rows{display:flex;flex-direction:column}
+  .status-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #111}
+  .status-row:last-child{border-bottom:none}
+  .s-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:#555}
+  .s-value{font-size:0.8rem;font-weight:600;letter-spacing:0;text-transform:none;display:flex;align-items:center;gap:6px}
+  .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
   section{padding:60px 40px;border-bottom:1px solid #1a1a1a}
   .section-label{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
@@ -44,17 +56,18 @@
   .projects-list{display:flex;flex-direction:column;gap:1px;background:#1a1a1a}
   .project-item{background:#000;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.2s}
   .project-item:hover{background:#0d0d0d}
-  .project-left{}
   .project-num{font-size:0.65rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
   .project-title{font-size:1.1rem;font-weight:700;letter-spacing:-0.5px}
   .project-desc{font-size:0.85rem;color:#666;margin-top:4px;letter-spacing:0;text-transform:none}
-  .project-arrow{font-size:1.2rem;color:#333}
-  .project-item:hover .project-arrow{color:#fff;transition:.2s}
+  .project-arrow{font-size:1.2rem;color:#333;transition:.2s}
+  .project-item:hover .project-arrow{color:#fff}
 
   .journal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:#1a1a1a}
   .journal-card{background:#000;padding:30px;cursor:pointer;transition:.2s}
   .journal-card:hover{background:#fff;color:#000}
+  .journal-card:hover .journal-preview{color:#555}
   .journal-card:hover .journal-meta{color:#555}
+  .journal-card:hover .journal-date{color:#888}
   .journal-date{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .journal-title{font-size:1.05rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
   .journal-preview{font-size:0.85rem;color:#666;line-height:1.6;letter-spacing:0;text-transform:none}
@@ -76,13 +89,16 @@
   .footer-left{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#333}
   .footer-right{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#333}
 
+  @media(max-width:800px){
+    .hero{grid-template-columns:1fr;gap:40px;padding:50px 20px 40px}
+    .status-panel{padding:24px}
+    .clock-time{font-size:2.5rem}
+  }
   @media(max-width:700px){
     nav{padding:16px 20px}
     .nav-links{display:none}
     .hamburger{display:flex}
     .mobile-menu a{padding:14px 20px}
-    .hero{padding:50px 20px 40px}
-    .hero-name{letter-spacing:-2px}
     section{padding:40px 20px}
     .skill-card,.project-item,.journal-card,.contact-item{padding:20px}
     .project-item{flex-direction:column;align-items:flex-start;gap:8px}
@@ -101,7 +117,7 @@
     <a href="#journal">Journal</a>
     <a href="#contact">Kontakt</a>
   </div>
-  <div class="hamburger" onclick="toggleMenu()" id="ham">
+  <div class="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
@@ -115,18 +131,53 @@
 </div>
 
 <div class="hero" id="about">
-  <div class="hero-label">// Hamburg, Deutschland — 2026</div>
-  <div class="hero-name">SAFA</div>
-  <div class="hero-sub">SYSTEMS &<br>STRATEGY</div>
-  <div class="hero-bio">
-    Angehender Fachinformatiker für Systemintegration. Abitur 2025, IHK-geprüft, Cisco IT Essentials. Ich interessiere mich ernsthaft für IT — Hardware, Netzwerke, Systeme. Ich baue Dinge und will verstehen wie sie funktionieren.
+  <div class="hero-left">
+    <div class="hero-label">// Hamburg, Deutschland — 2026</div>
+    <div class="hero-name">SAFA</div>
+    <div class="hero-sub">SYSTEMS &<br>STRATEGY</div>
+    <div class="hero-bio">
+      Angehender Fachinformatiker für Systemintegration. Abitur 2025, IHK-geprüft, Cisco IT Essentials. Ich interessiere mich ernsthaft für IT — Hardware, Netzwerke, Systeme. Ich baue Dinge und will verstehen wie sie funktionieren.
+    </div>
+    <div class="hero-tags">
+      <div class="tag">Hamburg</div>
+      <div class="tag">IT / Systemintegration</div>
+      <div class="tag">Verfügbar ab sofort</div>
+      <div class="tag">IHK-zertifiziert</div>
+      <div class="tag">Cisco IT Essentials</div>
+    </div>
   </div>
-  <div class="hero-tags">
-    <div class="tag">Hamburg</div>
-    <div class="tag">IT / Systemintegration</div>
-    <div class="tag">Verfügbar ab sofort</div>
-    <div class="tag">IHK-zertifiziert</div>
-    <div class="tag">Cisco IT Essentials</div>
+
+  <div class="status-panel">
+    <div class="clock-block">
+      <div class="clock-time" id="clock">--:--:--</div>
+      <div class="clock-date" id="dateline">Hamburg, Deutschland</div>
+    </div>
+    <div class="status-rows">
+      <div class="status-row">
+        <div class="s-label">Status</div>
+        <div class="s-value"><span class="dot"></span>Offen für Ausbildung</div>
+      </div>
+      <div class="status-row">
+        <div class="s-label">Standort</div>
+        <div class="s-value">Hamburg, 040</div>
+      </div>
+      <div class="status-row">
+        <div class="s-label">Verfügbar</div>
+        <div class="s-value">Ab sofort</div>
+      </div>
+      <div class="status-row">
+        <div class="s-label">Ausbildung</div>
+        <div class="s-value">FI Systemintegration</div>
+      </div>
+      <div class="status-row">
+        <div class="s-label">Stack</div>
+        <div class="s-value">Hardware · Netzwerk · Python</div>
+      </div>
+      <div class="status-row">
+        <div class="s-label">Zertifiziert</div>
+        <div class="s-value">IHK · Cisco IT Essentials</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -187,6 +238,7 @@
         <div class="project-title">Schülerfirma — Vorstandsvorsitz</div>
         <div class="project-desc">Leitung und Organisation einer Schülerfirma. Verantwortung für Strategie, Team und Abläufe.</div>
       </div>
+      <div class="project-arrow">→</div>
     </div>
     <div class="project-item">
       <div class="project-left">
@@ -194,6 +246,7 @@
         <div class="project-title">Cisco IT Essentials</div>
         <div class="project-desc">Abgeschlossener Online-Kurs 2025. Netzwerkgrundlagen, Hardware, Betriebssysteme.</div>
       </div>
+      <div class="project-arrow">→</div>
     </div>
     <div class="project-item">
       <div class="project-left">
@@ -201,6 +254,7 @@
         <div class="project-title">IHK Fachkundeprüfung</div>
         <div class="project-desc">Taxi & Mietwagenverkehr — bestanden Dezember 2025. Zeigt Lernfähigkeit und Disziplin.</div>
       </div>
+      <div class="project-arrow">→</div>
     </div>
     <div class="project-item">
       <div class="project-left">
@@ -208,6 +262,7 @@
         <div class="project-title">Diese Website</div>
         <div class="project-desc">Aufgebaut mit HTML/CSS. Custom Domain, GitHub Pages. Eigeninitiative.</div>
       </div>
+      <div class="project-arrow">→</div>
     </div>
   </div>
 </section>
@@ -270,9 +325,22 @@
 </footer>
 
 <script>
+function tick(){
+  var now=new Date();
+  var h=String(now.getHours()).padStart(2,'0');
+  var m=String(now.getMinutes()).padStart(2,'0');
+  var s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent=h+':'+m+':'+s;
+  var days=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  var months=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  var d=days[now.getDay()]+', '+now.getDate()+'. '+months[now.getMonth()]+' '+now.getFullYear();
+  document.getElementById('dateline').textContent=d;
+}
+tick();
+setInterval(tick,1000);
+
 function toggleMenu(){
-  var m=document.getElementById('mobileMenu');
-  m.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 function closeMenu(){
   document.getElementById('mobileMenu').classList.remove('open');

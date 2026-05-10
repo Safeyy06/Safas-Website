@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAFA // AHADZADA</title>
+<title>SAFA // 040</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{--bg:#000;--fg:#fff;--grey:#111;--mid:#333;--muted:#666;--accent:#fff}
@@ -30,9 +30,12 @@
   .tag{padding:6px 14px;border:1px solid #333;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 
   .status-panel{border:1px solid #1a1a1a;padding:36px;display:flex;flex-direction:column;gap:0;background:#000}
-  .clock-block{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid #1a1a1a}
+  .clock-block{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+  .clock-text{flex:1;min-width:0}
   .clock-time{font-size:clamp(2.2rem,4vw,4rem);font-weight:900;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums}
   .clock-date{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:#555;margin-top:10px}
+  .photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:1px solid #222;flex-shrink:0;filter:grayscale(100%);transition:filter .3s}
+  .photo:hover{filter:grayscale(0%)}
   .status-rows{display:flex;flex-direction:column}
   .status-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #111}
   .status-row:last-child{border-bottom:none}
@@ -93,6 +96,7 @@
     .hero{grid-template-columns:1fr;gap:40px;padding:50px 20px 40px}
     .status-panel{padding:24px}
     .clock-time{font-size:2.5rem}
+    .photo{width:70px;height:70px}
   }
   @media(max-width:700px){
     nav{padding:16px 20px}
@@ -143,13 +147,17 @@
       <div class="tag">IT / Systemintegration</div>
       <div class="tag">Verfügbar ab sofort</div>
       <div class="tag">IHK-zertifiziert</div>
+      <div class="tag">Cisco IT Essentials</div>
     </div>
   </div>
 
   <div class="status-panel">
     <div class="clock-block">
-      <div class="clock-time" id="clock">--:--:--</div>
-      <div class="clock-date" id="dateline">Hamburg, Deutschland</div>
+      <div class="clock-text">
+        <div class="clock-time" id="clock">--:--:--</div>
+        <div class="clock-date" id="dateline">Hamburg, Deutschland</div>
+      </div>
+      <img src="safa.png" alt="Safa Ahadzada" class="photo">
     </div>
     <div class="status-rows">
       <div class="status-row">
@@ -311,10 +319,10 @@
     </div>
   </div>
   <div class="contact-form">
-    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; text-transform: none;">
-      Lass uns was bewegen. Klick auf den Button, um mir direkt eine Mail zu schreiben.
-    </p>
-    <button type="button" onclick="window.location.href='mailto:safa.ahadzada06@gmail.com?subject=Kontakt über Website';">E-Mail schreiben →</button>
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="E-Mail">
+    <textarea placeholder="Nachricht"></textarea>
+    <button type="button">Nachricht senden →</button>
   </div>
 </section>
 
